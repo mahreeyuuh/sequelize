@@ -1,0 +1,44 @@
+<html>
+<head> 
+<%- include ('./partials/todohead.ejs') %>
+<div class="container">
+<h2> Add your tasks here! </h2>
+
+<form action ="/create_task" method="POST">
+
+<input type="text" name="task" placeholder="Add new task">
+<button> Add Task </button>
+
+
+<h2> Added Task </h2>
+
+<% for( var i = 0; i < task.length; i++){ %>
+    <li><input type="checkbox" name="check" value="<%= task[i] %>" /> <%= task[i]  %> </li>
+<% } %>
+
+
+<button formaction="/delete_task" type="submit" id="top"> Done </button>
+</form>
+
+<h2> Completed task </h2>
+
+ <% for(var i = 0; i < complete.length; i++){ %>
+    <li><%= complete[i] %> </li>
+<% } %>
+
+<form action ="/uniqID" method="POST">
+  
+    <h2> Search your task </h2>
+    <input type="text" name="code" placeholder="Input unique id here">
+    <button> Search </button>
+   
+   
+
+    
+
+    </form>
+
+</div>
+
+</body>
+</html>
