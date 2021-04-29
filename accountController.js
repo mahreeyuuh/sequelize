@@ -9,14 +9,21 @@ app.use(express.static("public"));
 
 
 exports.createAccount = async(req, res) => {
-    
-    req.body.code = generateCode();
-    let data = await account.model.create(
-       req.body,
-       res.redirect('/create_accounts')
-    )
-        
-    console.log(data);
+  var salt = crypto.randomBytes(64).toString('hex');
+  var password = crypto.pbkdf2Sync(req.body.password, salt, 10000, 64, 'sha512').toString('base64');
+  try {
+    let account= await account.model.create({
+      code: generateCode(),
+      username: req.body.username,
+      password: req.body.password,
+      role: "user",
+      password: password,
+      salt: salt
+    });
+    res.redirect("create")
+    console.log(account)
+  } catch (err) {
+  }
 }
 
 exports.createTask = async(req, res) => {
