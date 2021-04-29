@@ -28,12 +28,12 @@ exports.createAccount = async(req, res) => {
 
 exports.createTask = async(req, res) => {
     req.body.code = generateCode();
-    let data = await task.model.create(
-        req.body,
+    let data = await data.model.create(
+        code = generateCode(),
+        task = req.body.task,
+        status = req.body.status,
         res.redirect("/tasktodo")
     )
-  
-    console.log(data);
 }
 
 exports.readAccount = async (req,res) =>{
